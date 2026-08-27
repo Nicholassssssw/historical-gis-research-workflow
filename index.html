@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="歷史地理資訊研究的八步工作流程、Prompt 與成果展示。">
+  <title>歷史地理資訊研究八步工作流程</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&amp;family=Ma+Shan+Zheng&amp;display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="歷史地理資訊研究首頁">
+        <span class="brand-seal" aria-hidden="true">輿</span>
+        <span><strong>歷史地理資訊研究</strong><small>八步工作流程</small></span>
+      </a>
+      <nav class="page-nav" aria-label="頁面選單">
+        <a class="active" href="index.html">工作流程</a>
+        <a href="teaching.html">教學說明</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="step-nav" aria-label="八個研究步驟">
+    <div class="step-nav-inner">
+      <a href="#step-1"><span>壹</span>抽地名</a>
+      <a href="#step-2"><span>貳</span>古今地區</a>
+      <a href="#step-3"><span>叁</span>地方志</a>
+      <a href="#step-4"><span>肆</span>座標範圍</a>
+      <a href="#step-5"><span>伍</span>資料庫配對</a>
+      <a href="#step-6"><span>陸</span>地方志推算</a>
+      <a href="#step-7"><span>柒</span>原文推算</a>
+      <a href="#step-8"><span>捌</span>地圖呈現</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">由文本至地圖 · 可追溯的研究紀錄</p>
+        <h1>歷史地理資訊研究<br>八步工作流程</h1>
+        <p>逐步展示地名抽取、古今區域核對、座標推算與地圖呈現。每一步均保留所用 Prompt 及研究成果，方便檢查、重做與教學。</p>
+      </div>
+      <aside class="hero-leaf" aria-hidden="true">
+        <div class="moon"></div>
+        <div class="mountain mountain-back"></div>
+        <div class="mountain mountain-mid"></div>
+        <div class="mountain mountain-front"></div>
+        <div class="mist mist-one"></div>
+        <div class="mist mist-two"></div>
+        <p>循文覓跡<br>因地成圖</p>
+      </aside>
+    </section>
+
+    <div class="ornamental-divider" aria-hidden="true"><span>◆</span></div>
+
+    <section class="workflow-step" id="step-1">
+      <div class="step-watermark" aria-hidden="true">壹</div>
+      <header class="step-heading">
+        <div><span>步驟一</span><h2>抽地名</h2></div>
+        <p>從原始文本辨識候選地名，保留原句、日期與經過／提及狀態。</p>
+      </header>
+      <div class="step-content">
+        <article class="prompt-panel">
+          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-1">複製</button></div>
+          <textarea id="prompt-1" readonly aria-label="步驟一 Prompt">Prompt 內容待提供。請把步驟一「抽地名」所使用的完整 Prompt 放在這裡。</textarea>
+        </article>
+        <article class="result-panel">
+          <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
+          <div class="file-placeholder">
+            <span class="file-mark" aria-hidden="true">表</span>
+            <strong>步驟一成果檔案</strong>
+            <p>Excel 檔案待提供</p>
+            <span class="pending-badge">待加入</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-step" id="step-2">
+      <div class="step-watermark" aria-hidden="true">貳</div>
+      <header class="step-heading">
+        <div><span>步驟二</span><h2>配對古代地區與現代地區</h2></div>
+        <p>把文本中的歷史行政區與現代省、市、縣建立可核查的對照關係。</p>
+      </header>
+      <div class="step-content">
+        <article class="prompt-panel">
+          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-2">複製</button></div>
+          <textarea id="prompt-2" readonly aria-label="步驟二 Prompt">Prompt 內容待提供。請把步驟二「配對古代地區與現代地區」所使用的完整 Prompt 放在這裡。</textarea>
+        </article>
+        <article class="result-panel">
+          <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
+          <div class="file-placeholder"><span class="file-mark" aria-hidden="true">表</span><strong>古今地區配對成果</strong><p>Excel 檔案待提供</p><span class="pending-badge">待加入</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-step" id="step-3">
+      <div class="step-watermark" aria-hidden="true">叁</div>
+      <header class="step-heading">
+        <div><span>步驟三</span><h2>配對地方志（有距離資料）</h2></div>
+        <p>找出帶有方向、里程或相鄰地點資訊的地方志記錄，作為定位證據。</p>
+      </header>
+      <div class="step-content">
+        <article class="prompt-panel">
+          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-3">複製</button></div>
+          <textarea id="prompt-3" readonly aria-label="步驟三 Prompt">Prompt 內容待提供。請把步驟三「配對地方志（有距離資料）」所使用的完整 Prompt 放在這裡。</textarea>
+        </article>
+        <article class="result-panel">
+          <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
+          <div class="file-placeholder"><span class="file-mark" aria-hidden="true">志</span><strong>地方志距離證據成果</strong><p>Excel 檔案待提供</p><span class="pending-badge">待加入</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-step" id="step-4">
+      <div class="step-watermark" aria-hidden="true">肆</div>
+      <header class="step-heading">
+        <div><span>步驟四</span><h2>設定經緯度範圍</h2></div>
+        <p>依歷史區域、行程前後站與可用證據，為每個地名建立合理搜尋範圍。</p>
+      </header>
+      <div class="step-content">
+        <article class="prompt-panel">
+          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-4">複製</button></div>
+          <textarea id="prompt-4" readonly aria-label="步驟四 Prompt">Prompt 內容待提供。請把步驟四「設定經緯度範圍」所使用的完整 Prompt 放在這裡。</textarea>
+        </article>
+        <article class="result-panel">
+          <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
+          <div class="file-placeholder"><span class="file-mark" aria-hidden="true">界</span><strong>座標範圍成果</strong><p>Excel 檔案待提供</p><span class="pending-badge">待加入</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-step" id="step-5">
+      <div class="step-watermark" aria-hidden="true">伍</div>
+      <header class="step-heading">
+        <div><span>步驟五</span><h2>用 Database 及 API 配對地點經緯度</h2></div>
+        <p>在既定範圍內比較歷史與現代地名資料庫，保留候選、來源與配對分數。</p>
+      </header>
+      <div class="step-content">
+        <article class="prompt-panel">
+          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-5">複製</button></div>
+          <textarea id="prompt-5" readonly aria-label="步驟五 Prompt">Prompt 內容待提供。請把步驟五「用 database 及 API 配對地點經緯度」所使用的完整 Prompt 放在這裡。</textarea>
+        </article>
+        <article class="result-panel">
+          <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
+          <div class="file-placeholder"><span class="file-mark" aria-hidden="true">庫</span><strong>資料庫與 API 配對成果</strong><p>Excel 檔案待提供</p><span class="pending-badge">待加入</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-step" id="step-6">
+      <div class="step-watermark" aria-hidden="true">陸</div>
+      <header class="step-heading">
+        <div><span>步驟六</span><h2>透過地方志推算經緯度</h2></div>
+        <p>利用地方志的方向、里程、行政歸屬及相鄰關係，估算尚未定位地點。</p>
+      </header>
+      <div class="step-content">
+        <article class="prompt-panel">
+          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-6">複製</button></div>
+          <textarea id="prompt-6" readonly aria-label="步驟六 Prompt">Prompt 內容待提供。請把步驟六「透過地方志推算經緯度」所使用的完整 Prompt 放在這裡。</textarea>
+        </article>
+        <article class="result-panel">
+          <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
+          <div class="file-placeholder"><span class="file-mark" aria-hidden="true">推</span><strong>地方志座標推算成果</strong><p>Excel 檔案待提供</p><span class="pending-badge">待加入</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-step" id="step-7">
+      <div class="step-watermark" aria-hidden="true">柒</div>
+      <header class="step-heading">
+        <div><span>步驟七</span><h2>透過原文推算經緯度</h2></div>
+        <p>以文本路線、先後次序、方向和距離描述，對剩餘地點作相對位置推算。</p>
+      </header>
+      <div class="step-content">
+        <article class="prompt-panel">
+          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-7">複製</button></div>
+          <textarea id="prompt-7" readonly aria-label="步驟七 Prompt">Prompt 內容待提供。請把步驟七「透過原文推算經緯度」所使用的完整 Prompt 放在這裡。</textarea>
+        </article>
+        <article class="result-panel">
+          <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
+          <div class="file-placeholder"><span class="file-mark" aria-hidden="true">文</span><strong>原文座標推算成果</strong><p>Excel 檔案待提供</p><span class="pending-badge">待加入</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-step" id="step-8">
+      <div class="step-watermark" aria-hidden="true">捌</div>
+      <header class="step-heading">
+        <div><span>步驟八</span><h2>將經緯度以地圖呈現</h2></div>
+        <p>把確認及推算座標放入 ArcGIS，呈現地點、路線、資料來源與研究註記。</p>
+      </header>
+      <div class="step-content">
+        <article class="prompt-panel">
+          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-8">複製</button></div>
+          <textarea id="prompt-8" readonly aria-label="步驟八 Prompt">Prompt 內容待提供。請把步驟八「將經緯度以地圖呈現」所使用的完整 Prompt 或製圖設定放在這裡。</textarea>
+        </article>
+        <article class="result-panel map-result-panel">
+          <div class="panel-label"><span>Result</span><small>ArcGIS map</small></div>
+          <div class="arcgis-placeholder">
+            <div class="map-grid" aria-hidden="true"></div>
+            <span class="map-pin pin-one" aria-hidden="true"></span>
+            <span class="map-pin pin-two" aria-hidden="true"></span>
+            <span class="map-pin pin-three" aria-hidden="true"></span>
+            <span class="map-line" aria-hidden="true"></span>
+            <div class="map-message"><span class="file-mark" aria-hidden="true">圖</span><strong>ArcGIS 地圖待嵌入</strong><p>提供 Web Map 連結後可直接放在此處</p><span class="pending-badge">待加入</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer><p><span aria-hidden="true">輿</span><strong>研究提示</strong>　每一步的 Prompt、資料來源與結果應一併保存，確保研究過程可以追溯。</p></footer>
+  <script src="app.js"></script>
+</body>
+</html>

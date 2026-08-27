@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="歷史地理資訊研究八步工作流程的教學說明。">
+  <title>教學說明｜歷史地理資訊研究</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&amp;family=Ma+Shan+Zheng&amp;display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html"><span class="brand-seal" aria-hidden="true">輿</span><span><strong>歷史地理資訊研究</strong><small>八步工作流程</small></span></a>
+      <nav class="page-nav" aria-label="頁面選單"><a href="index.html">工作流程</a><a class="active" href="teaching.html">教學說明</a></nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero teaching-hero"><div class="hero-copy"><p class="eyebrow">Teaching · 方法與操作</p><h1>教學說明</h1><p>逐步理解八個研究階段的目的、資料準備、判斷原則與成果檢查方法。</p></div></section>
+    <div class="ornamental-divider" aria-hidden="true"><span>◆</span></div>
+
+    <section class="teaching-intro">
+      <h2>如何使用這套工作流程</h2>
+      <p>八個步驟由文本處理開始，逐層加入歷史區域、地方志、資料庫及空間推算證據，最後才製作地圖。每一步均應保留 Prompt、輸入資料、人工修改與輸出檔案。</p>
+      <div class="method-principles">
+        <div><strong>證據優先</strong><span>只按文本、地方志及可追溯資料來源作判斷，不以模型記憶補充。</span></div>
+        <div><strong>逐層縮窄</strong><span>先確認古今區域及座標範圍，再進行精確座標配對與推算。</span></div>
+        <div><strong>保留不確定性</strong><span>確認、可能及資料不足必須分開標示，避免把推算誤作已證實位置。</span></div>
+      </div>
+    </section>
+
+    <div class="teaching-grid">
+      <article class="teaching-card" id="teach-1"><header><span class="teaching-number">壹</span><h2>抽地名</h2></header><ul class="teaching-points"><li><strong>目的：</strong>找出文本中具有研究價值的地理實體。</li><li><strong>準備：</strong>提供文本名稱、年代、日期段與完整原文。</li><li><strong>檢查：</strong>核對原句、日期及經過／提及狀態，避免遺漏引文地名。</li></ul><a class="step-jump" href="index.html#step-1">查看 Prompt 與成果</a></article>
+      <article class="teaching-card" id="teach-2"><header><span class="teaching-number">貳</span><h2>配對古代與現代地區</h2></header><ul class="teaching-points"><li><strong>目的：</strong>建立歷史府州縣與現代行政區的對照。</li><li><strong>準備：</strong>使用旅行年代、同日行程及文本明示的行政界線。</li><li><strong>檢查：</strong>不得只因現代位置接近便取代歷史行政歸屬。</li></ul><a class="step-jump" href="index.html#step-2">查看 Prompt 與成果</a></article>
+      <article class="teaching-card" id="teach-3"><header><span class="teaching-number">叁</span><h2>配對地方志距離資料</h2></header><ul class="teaching-points"><li><strong>目的：</strong>尋找方向、里程、鄉里及相鄰地點證據。</li><li><strong>準備：</strong>以地名、歷史府縣及相關年代搜尋地方志。</li><li><strong>檢查：</strong>分清原志記載、後人轉引與研究者推論。</li></ul><a class="step-jump" href="index.html#step-3">查看 Prompt 與成果</a></article>
+      <article class="teaching-card" id="teach-4"><header><span class="teaching-number">肆</span><h2>設定經緯度範圍</h2></header><ul class="teaching-points"><li><strong>目的：</strong>為候選地點限定合理的空間搜尋邊界。</li><li><strong>準備：</strong>結合歷史區域、前後站、方向及里程。</li><li><strong>檢查：</strong>記錄範圍設定原因，不用縣治座標冒充具體地物。</li></ul><a class="step-jump" href="index.html#step-4">查看 Prompt 與成果</a></article>
+      <article class="teaching-card" id="teach-5"><header><span class="teaching-number">伍</span><h2>Database 及 API 配對</h2></header><ul class="teaching-points"><li><strong>目的：</strong>比較歷史與現代資料庫中的候選座標。</li><li><strong>準備：</strong>使用規範地名、年代、歷史／現代行政區及座標範圍。</li><li><strong>檢查：</strong>保留來源、候選名稱、分數與人工選擇紀錄。</li></ul><a class="step-jump" href="index.html#step-5">查看 Prompt 與成果</a></article>
+      <article class="teaching-card" id="teach-6"><header><span class="teaching-number">陸</span><h2>地方志座標推算</h2></header><ul class="teaching-points"><li><strong>目的：</strong>處理資料庫未能直接定位但地方志證據較完整的地點。</li><li><strong>準備：</strong>整理參照點、方向、距離及行政歸屬。</li><li><strong>檢查：</strong>標示推算方法與誤差範圍，不表述為唯一精確位置。</li></ul><a class="step-jump" href="index.html#step-6">查看 Prompt 與成果</a></article>
+      <article class="teaching-card" id="teach-7"><header><span class="teaching-number">柒</span><h2>原文座標推算</h2></header><ul class="teaching-points"><li><strong>目的：</strong>利用作者路線語境估計剩餘地點的相對位置。</li><li><strong>準備：</strong>提取前後實際行程地點、方向詞及距離詞。</li><li><strong>檢查：</strong>文本先後不等於地理鄰近；沒有空間證據便維持資料不足。</li></ul><a class="step-jump" href="index.html#step-7">查看 Prompt 與成果</a></article>
+      <article class="teaching-card" id="teach-8"><header><span class="teaching-number">捌</span><h2>ArcGIS 地圖呈現</h2></header><ul class="teaching-points"><li><strong>目的：</strong>把確認及推算結果轉化為可檢查的空間展示。</li><li><strong>準備：</strong>輸出 WGS84 經緯度、來源、分類、原句及路線次序。</li><li><strong>檢查：</strong>用不同符號區分確認與推算座標，並註明路線不是歷史道路重建。</li></ul><a class="step-jump" href="index.html#step-8">查看 Prompt 與成果</a></article>
+    </div>
+  </main>
+  <footer><p><span aria-hidden="true">輿</span><strong>方法提示</strong>　所有推算都應保存證據鏈、判斷原因與不確定性。</p></footer>
+</body>
+</html>
