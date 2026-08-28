@@ -125,6 +125,10 @@ textarea:focus { border-color: var(--wood); box-shadow: 0 0 0 3px rgba(107,66,38
 .lesson-kicker { color: var(--bronze); font-size: 11px; font-weight: 900; letter-spacing: .16em; }
 .lesson-card-header h2 { margin: 8px 0 0; color: var(--wood-dark); font-size: 29px; letter-spacing: .05em; }
 .lesson-number { width: 52px; height: 52px; display: grid; place-items: center; border: 1px solid var(--vermillion); color: var(--vermillion); font-size: 24px; font-weight: 900; transform: rotate(1.5deg); }
+.lesson-intro-panel { min-height: 430px; padding: 54px 70px 24px; display: flex; flex-direction: column; }
+.lesson-intro-text { max-width: 720px; margin: 0 auto; color: var(--ink-soft); font-size: 17px; line-height: 2.05; white-space: pre-line; }
+.lesson-start-button { min-width: 138px; margin: auto auto 0; padding: 12px 24px; border: 1px solid var(--vermillion); background: var(--vermillion); color: var(--cream); cursor: pointer; font-weight: 900; letter-spacing: .12em; }
+.lesson-start-button:hover { background: var(--wood-dark); }
 .lesson-screen { position: relative; height: 230px; margin: 26px 4px 22px; padding: 0 30px 28px; overflow: auto; border: 1px solid #425043; background: linear-gradient(145deg,#29342d,#1d2822); color: #f5eed7; box-shadow: inset 0 0 30px rgba(0,0,0,.28); }
 .lesson-screen::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .12; background: repeating-linear-gradient(0deg,transparent 0 3px,#fff 4px); }
 .screen-toolbar { position: sticky; top: 0; z-index: 2; min-height: 44px; margin: 0 -30px; padding: 12px 18px 9px; display: flex; align-items: center; justify-content: space-between; gap: 16px; background: linear-gradient(180deg,#29342d 76%,rgba(41,52,45,0)); }
@@ -147,6 +151,13 @@ textarea:focus { border-color: var(--wood); box-shadow: 0 0 0 3px rgba(107,66,38
 .answer-feedback { min-height: 20px; margin: 15px 0 0; font-size: 11px; line-height: 1.6; }
 .answer-feedback.is-correct { color: var(--jade); font-weight: 800; }
 .answer-feedback.is-wrong { color: var(--vermillion); font-weight: 800; }
+.generated-prompt-panel { margin: 0 4px 26px; padding: 19px; border: 2px solid var(--bronze); background: rgba(255,246,223,.88); box-shadow: 0 8px 22px rgba(71,41,26,.09); }
+.generated-prompt-panel > header { margin-bottom: 13px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.generated-prompt-panel > header span, .generated-prompt-panel > header strong { display: block; }
+.generated-prompt-panel > header span { margin-bottom: 3px; color: var(--jade); font-size: 10px; font-weight: 900; letter-spacing: .12em; }
+.generated-prompt-panel > header strong { color: var(--wood-dark); font-size: 14px; }
+.generated-prompt-panel .lesson-copy-button { flex: 0 0 auto; border-color: var(--vermillion); background: var(--vermillion); color: var(--cream); }
+.generated-prompt-text { min-height: 180px; resize: vertical; border-color: var(--line-strong); background: #fffaf0; font-size: 12px; line-height: 1.75; }
 .lesson-card-footer { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 0 4px; }
 .lesson-card-footer span { color: var(--ink-soft); font-size: 11px; text-align: center; }
 .lesson-nav-button { min-width: 112px; padding: 10px 15px; border: 1px solid var(--line-strong); background: var(--paper-panel); color: var(--wood); cursor: pointer; font-weight: 800; }
@@ -225,11 +236,16 @@ footer p > span { position: absolute; top: 13px; left: 1px; width: 18px; height:
   .lesson-card-header { padding-inline: 6px; }
   .lesson-card-header h2 { font-size: 24px; }
   .lesson-screen { height: 245px; margin-inline: 5px; padding: 0 18px 22px; }
+  .lesson-intro-panel { min-height: 440px; padding: 38px 20px 20px; }
+  .lesson-intro-text { font-size: 15px; line-height: 1.9; }
   .screen-toolbar { margin-inline: -18px; }
   .lesson-question { margin-inline: 5px; padding: 16px 10px; }
   .answer-row { display: block; }
   .lesson-card-footer { grid-template-columns: 1fr 1fr; }
   .lesson-card-footer span { grid-column: 1 / -1; grid-row: 1; }
+  .generated-prompt-panel { margin-inline: 5px; padding: 15px; }
+  .generated-prompt-panel > header { align-items: flex-start; }
+  .generated-prompt-text { min-height: 210px; }
   .lesson-nav-button { min-width: 0; }
 }
 

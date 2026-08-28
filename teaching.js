@@ -20,6 +20,9 @@
   const progressTrack = document.querySelector('.lesson-progress-track');
   const progressBar = document.getElementById('lesson-progress-bar');
   const screen = document.querySelector('.lesson-screen');
+  const introPanel = document.getElementById('lesson-intro-panel');
+  const introText = document.getElementById('lesson-intro-text');
+  const introStartButton = document.getElementById('lesson-start-button');
   const output = document.getElementById('typewriter-text');
   const cursor = document.getElementById('typing-cursor');
   const copyButton = document.getElementById('lesson-copy-button');
@@ -28,6 +31,9 @@
   const questionOptions = document.getElementById('question-options');
   const answerButton = document.getElementById('answer-button');
   const feedback = document.getElementById('answer-feedback');
+  const promptPanel = document.getElementById('generated-prompt-panel');
+  const promptText = document.getElementById('generated-prompt-text');
+  const cardFooter = document.getElementById('lesson-card-footer');
   const previousButton = document.getElementById('previous-step');
   const nextButton = document.getElementById('next-step');
   const navHint = document.getElementById('lesson-nav-hint');
@@ -110,9 +116,10 @@
   }
 
   function showCompleted(step) {
-    output.textContent = `${step.success}\n\n【完成 Prompt】\n${step.prompt}`;
+    output.textContent = step.success;
     cursor.hidden = true;
-    copyButton.hidden = false;
+    promptText.value = step.prompt;
+    promptPanel.hidden = false;
     question.hidden = false;
     feedback.className = 'answer-feedback is-correct';
     feedback.textContent = '答案正確，Prompt 已完成。';
@@ -129,22 +136,21 @@
     progressTrack.setAttribute('aria-valuemin', '0');
     progressTrack.setAttribute('aria-valuenow', String(currentIndex));
     progressBar.style.width = `${progress}%`;
-    copyButton.hidden = true;
+    promptPanel.hidden = true;
+    promptText.value = '';
+    introPanel.hidden = true;
+    screen.hidden = false;
+    cardFooter.hidden = false;
     feedback.className = 'answer-feedback';
     feedback.textContent = '';
 
     if (step.isIntro) {
       question.hidden = true;
-      updateNavigation();
-      if (completed[currentIndex]) {
-        output.textContent = step.intro;
-        cursor.hidden = true;
-        return;
-      }
-      typeText(step.intro, () => {
-        completed[currentIndex] = true;
-        updateNavigation();
-      });
+      screen.hidden = true;
+      cardFooter.hidden = true;
+      introText.textContent = step.intro;
+      introPanel.hidden = false;
+      cursor.hidden = true;
       return;
     }
 
@@ -189,16 +195,17 @@
     answerButton.textContent = '生成 Prompt 中…';
     feedback.className = 'answer-feedback is-correct';
     feedback.textContent = '答案正確，正在整理本步驟 Prompt。';
-    copyButton.hidden = true;
+    promptPanel.hidden = true;
 
-    const finalText = `${step.success}\n\n【完成 Prompt】\n${step.prompt}`;
+    const finalText = step.success;
     await typeText(finalText, () => {
       completed[currentIndex] = true;
       answerButton.textContent = '已完成';
       feedback.textContent = 'Prompt 已完成，可以複製或前往下一步。';
-      copyButton.hidden = false;
-      copyButton.classList.add('copy-reveal');
-      window.setTimeout(() => copyButton.classList.remove('copy-reveal'), 500);
+      promptText.value = step.prompt;
+      promptPanel.hidden = false;
+      promptPanel.classList.add('copy-reveal');
+      window.setTimeout(() => promptPanel.classList.remove('copy-reveal'), 500);
       updateNavigation();
     });
   }
@@ -222,6 +229,11 @@
 
   answerButton.addEventListener('click', completeStep);
 
+  introStartButton.addEventListener('click', () => {
+    completed[0] = true;
+    turnTo(1, 'next');
+  });
+
   previousButton.addEventListener('click', () => turnTo(currentIndex - 1, 'previous'));
 
   nextButton.addEventListener('click', () => {
@@ -234,7 +246,7 @@
   });
 
   copyButton.addEventListener('click', async () => {
-    const prompt = slides[currentIndex].prompt;
+    const prompt = promptText.value;
     const original = copyButton.textContent;
     try {
       await navigator.clipboard.writeText(prompt);
