@@ -1,0 +1,227 @@
+(() => {
+  const steps = window.TEACHING_STEPS || [];
+  if (!steps.length) return;
+
+  const deck = document.getElementById('lesson-deck');
+  const card = document.getElementById('lesson-card');
+  const kicker = document.getElementById('lesson-kicker');
+  const title = document.getElementById('lesson-title');
+  const numeral = document.getElementById('lesson-number');
+  const progressLabel = document.getElementById('lesson-progress-label');
+  const progressTrack = document.querySelector('.lesson-progress-track');
+  const progressBar = document.getElementById('lesson-progress-bar');
+  const screen = document.querySelector('.lesson-screen');
+  const output = document.getElementById('typewriter-text');
+  const cursor = document.getElementById('typing-cursor');
+  const copyButton = document.getElementById('lesson-copy-button');
+  const question = document.getElementById('lesson-question');
+  const questionLegend = document.getElementById('question-legend');
+  const questionOptions = document.getElementById('question-options');
+  const answerButton = document.getElementById('answer-button');
+  const feedback = document.getElementById('answer-feedback');
+  const previousButton = document.getElementById('previous-step');
+  const nextButton = document.getElementById('next-step');
+  const navHint = document.getElementById('lesson-nav-hint');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let currentIndex = 0;
+  let typingRun = 0;
+  let isTurning = false;
+  const completed = Array(steps.length).fill(false);
+  const savedAnswers = Array.from({ length: steps.length }, () => []);
+
+  const pause = (milliseconds) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+
+  async function typeText(text, onComplete) {
+    const run = ++typingRun;
+    output.textContent = '';
+    screen.scrollTop = 0;
+    cursor.hidden = false;
+    const speed = reducedMotion ? 0 : 13;
+    for (const character of text) {
+      if (run !== typingRun) return;
+      output.textContent += character;
+      if (output.textContent.length % 8 === 0) screen.scrollTop = screen.scrollHeight;
+      if (speed) await pause(character === '\n' ? 80 : speed);
+    }
+    if (run !== typingRun) return;
+    cursor.hidden = true;
+    if (onComplete) onComplete();
+  }
+
+  function selectedIndexes() {
+    return [...questionOptions.querySelectorAll('input:checked')].map((input) => Number(input.value));
+  }
+
+  function expectedIndexes(step) {
+    return step.question.options
+      .map((option, index) => option.correct ? index : -1)
+      .filter((index) => index >= 0);
+  }
+
+  function answersMatch(step, selected) {
+    const expected = expectedIndexes(step);
+    return selected.length === expected.length && expected.every((index) => selected.includes(index));
+  }
+
+  function buildQuestion(step) {
+    const isMultiple = step.question.type === 'multiple';
+    const typeLabel = isMultiple ? '多選題' : '單選題';
+    const inputType = isMultiple ? 'checkbox' : 'radio';
+    questionLegend.innerHTML = `<span>${typeLabel}</span>${step.question.prompt}`;
+    questionOptions.innerHTML = '';
+
+    step.question.options.forEach((option, index) => {
+      const label = document.createElement('label');
+      const input = document.createElement('input');
+      input.type = inputType;
+      input.name = `lesson-answer-${currentIndex}`;
+      input.value = String(index);
+      input.checked = savedAnswers[currentIndex].includes(index);
+      input.disabled = completed[currentIndex];
+      label.append(input, document.createTextNode(` ${option.label}`));
+      questionOptions.append(label);
+    });
+
+    answerButton.disabled = completed[currentIndex];
+    answerButton.textContent = completed[currentIndex] ? '已完成' : '提交答案';
+  }
+
+  function updateNavigation() {
+    previousButton.disabled = currentIndex === 0 || isTurning;
+    nextButton.disabled = !completed[currentIndex] || isTurning;
+    nextButton.textContent = currentIndex === steps.length - 1 ? '返回工作流程 →' : '下一步 →';
+    navHint.textContent = completed[currentIndex]
+      ? (currentIndex === steps.length - 1 ? '八步教學已完成' : '本步驟已完成，可以繼續')
+      : '答對題目並完成動畫後解鎖下一步';
+  }
+
+  function showCompleted(step) {
+    output.textContent = `${step.success}\n\n【完成 Prompt】\n${step.prompt}`;
+    cursor.hidden = true;
+    copyButton.hidden = false;
+    question.hidden = false;
+    feedback.className = 'answer-feedback is-correct';
+    feedback.textContent = '答案正確，Prompt 已完成。';
+    updateNavigation();
+  }
+
+  function renderStep() {
+    const step = steps[currentIndex];
+    const progress = ((currentIndex + 1) / steps.length) * 100;
+    kicker.textContent = step.stepLabel;
+    title.textContent = step.title;
+    numeral.textContent = step.numeral;
+    progressLabel.textContent = `${step.stepLabel}／共八步`;
+    progressTrack.setAttribute('aria-valuenow', String(currentIndex + 1));
+    progressBar.style.width = `${progress}%`;
+    copyButton.hidden = true;
+    feedback.className = 'answer-feedback';
+    feedback.textContent = '';
+    buildQuestion(step);
+    updateNavigation();
+
+    if (completed[currentIndex]) {
+      showCompleted(step);
+      return;
+    }
+
+    question.hidden = true;
+    typeText(step.intro, () => {
+      question.hidden = false;
+      question.classList.add('question-reveal');
+      window.setTimeout(() => question.classList.remove('question-reveal'), 450);
+    });
+  }
+
+  async function completeStep() {
+    const step = steps[currentIndex];
+    const selected = selectedIndexes();
+    if (!selected.length) {
+      feedback.className = 'answer-feedback is-wrong';
+      feedback.textContent = '請先選擇答案。';
+      return;
+    }
+
+    if (!answersMatch(step, selected)) {
+      feedback.className = 'answer-feedback is-wrong';
+      feedback.textContent = step.question.type === 'multiple' ? '答案尚未完整，請重新檢查所有選項。' : '答案不正確，請再想一想。';
+      card.classList.remove('answer-shake');
+      void card.offsetWidth;
+      card.classList.add('answer-shake');
+      return;
+    }
+
+    savedAnswers[currentIndex] = selected;
+    questionOptions.querySelectorAll('input').forEach((input) => { input.disabled = true; });
+    answerButton.disabled = true;
+    answerButton.textContent = '生成 Prompt 中…';
+    feedback.className = 'answer-feedback is-correct';
+    feedback.textContent = '答案正確，正在整理本步驟 Prompt。';
+    copyButton.hidden = true;
+
+    const finalText = `${step.success}\n\n【完成 Prompt】\n${step.prompt}`;
+    await typeText(finalText, () => {
+      completed[currentIndex] = true;
+      answerButton.textContent = '已完成';
+      feedback.textContent = 'Prompt 已完成，可以複製或前往下一步。';
+      copyButton.hidden = false;
+      copyButton.classList.add('copy-reveal');
+      window.setTimeout(() => copyButton.classList.remove('copy-reveal'), 500);
+      updateNavigation();
+    });
+  }
+
+  async function turnTo(index, direction) {
+    if (isTurning || index < 0 || index >= steps.length || index === currentIndex) return;
+    isTurning = true;
+    typingRun += 1;
+    card.classList.add(direction === 'next' ? 'turn-out-left' : 'turn-out-right');
+    await pause(reducedMotion ? 0 : 230);
+    currentIndex = index;
+    renderStep();
+    card.classList.remove('turn-out-left', 'turn-out-right');
+    card.classList.add(direction === 'next' ? 'turn-in-right' : 'turn-in-left');
+    await pause(reducedMotion ? 0 : 380);
+    card.classList.remove('turn-in-right', 'turn-in-left');
+    isTurning = false;
+    updateNavigation();
+    deck.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+  }
+
+  answerButton.addEventListener('click', completeStep);
+
+  previousButton.addEventListener('click', () => turnTo(currentIndex - 1, 'previous'));
+
+  nextButton.addEventListener('click', () => {
+    if (!completed[currentIndex]) return;
+    if (currentIndex === steps.length - 1) {
+      window.location.href = 'index.html';
+      return;
+    }
+    turnTo(currentIndex + 1, 'next');
+  });
+
+  copyButton.addEventListener('click', async () => {
+    const prompt = steps[currentIndex].prompt;
+    const original = copyButton.textContent;
+    try {
+      await navigator.clipboard.writeText(prompt);
+      copyButton.textContent = '已複製';
+    } catch {
+      const helper = document.createElement('textarea');
+      helper.value = prompt;
+      helper.setAttribute('readonly', '');
+      helper.style.position = 'fixed';
+      helper.style.opacity = '0';
+      document.body.append(helper);
+      helper.select();
+      document.execCommand('copy');
+      helper.remove();
+      copyButton.textContent = '已複製';
+    }
+    window.setTimeout(() => { copyButton.textContent = original; }, 1400);
+  });
+
+  renderStep();
+})();
