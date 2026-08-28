@@ -2,6 +2,15 @@
   const steps = window.TEACHING_STEPS || [];
   if (!steps.length) return;
 
+  const introSlide = {
+    isIntro: true,
+    numeral: '序',
+    stepLabel: '教學導覽',
+    title: '如何使用互動教學',
+    intro: '這裡會用八個步驟教你逐步建立歷史地理研究 Prompt。\n\n每張卡片先解釋一個方法，再請你完成單選題或多選題。答對後，系統會以打字動畫組合該步驟的完整 Prompt。\n\n動畫完成後，右上角會出現「複製 Prompt」。你可以把 Prompt 貼到自己使用的 AI，加入研究文本或資料，看看實際輸出結果，再返回這裡繼續下一步。'
+  };
+  const slides = [introSlide, ...steps];
+
   const deck = document.getElementById('lesson-deck');
   const card = document.getElementById('lesson-card');
   const kicker = document.getElementById('lesson-kicker');
@@ -27,8 +36,8 @@
   let currentIndex = 0;
   let typingRun = 0;
   let isTurning = false;
-  const completed = Array(steps.length).fill(false);
-  const savedAnswers = Array.from({ length: steps.length }, () => []);
+  const completed = Array(slides.length).fill(false);
+  const savedAnswers = Array.from({ length: slides.length }, () => []);
 
   const pause = (milliseconds) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
 
@@ -90,9 +99,13 @@
   function updateNavigation() {
     previousButton.disabled = currentIndex === 0 || isTurning;
     nextButton.disabled = !completed[currentIndex] || isTurning;
-    nextButton.textContent = currentIndex === steps.length - 1 ? '返回工作流程 →' : '下一步 →';
+    nextButton.textContent = currentIndex === slides.length - 1 ? '返回工作流程 →' : '下一步 →';
+    if (currentIndex === 0) {
+      navHint.textContent = completed[currentIndex] ? '準備完成，可以開始步驟一' : '閱讀導覽後解鎖步驟一';
+      return;
+    }
     navHint.textContent = completed[currentIndex]
-      ? (currentIndex === steps.length - 1 ? '八步教學已完成' : '本步驟已完成，可以繼續')
+      ? (currentIndex === slides.length - 1 ? '八步教學已完成' : '本步驟已完成，可以繼續')
       : '答對題目並完成動畫後解鎖下一步';
   }
 
@@ -107,17 +120,34 @@
   }
 
   function renderStep() {
-    const step = steps[currentIndex];
-    const progress = ((currentIndex + 1) / steps.length) * 100;
+    const step = slides[currentIndex];
+    const progress = (currentIndex / steps.length) * 100;
     kicker.textContent = step.stepLabel;
     title.textContent = step.title;
     numeral.textContent = step.numeral;
-    progressLabel.textContent = `${step.stepLabel}／共八步`;
-    progressTrack.setAttribute('aria-valuenow', String(currentIndex + 1));
+    progressLabel.textContent = step.isIntro ? '教學導覽' : `${step.stepLabel}／共八步`;
+    progressTrack.setAttribute('aria-valuemin', '0');
+    progressTrack.setAttribute('aria-valuenow', String(currentIndex));
     progressBar.style.width = `${progress}%`;
     copyButton.hidden = true;
     feedback.className = 'answer-feedback';
     feedback.textContent = '';
+
+    if (step.isIntro) {
+      question.hidden = true;
+      updateNavigation();
+      if (completed[currentIndex]) {
+        output.textContent = step.intro;
+        cursor.hidden = true;
+        return;
+      }
+      typeText(step.intro, () => {
+        completed[currentIndex] = true;
+        updateNavigation();
+      });
+      return;
+    }
+
     buildQuestion(step);
     updateNavigation();
 
@@ -135,7 +165,8 @@
   }
 
   async function completeStep() {
-    const step = steps[currentIndex];
+    const step = slides[currentIndex];
+    if (step.isIntro) return;
     const selected = selectedIndexes();
     if (!selected.length) {
       feedback.className = 'answer-feedback is-wrong';
@@ -173,7 +204,7 @@
   }
 
   async function turnTo(index, direction) {
-    if (isTurning || index < 0 || index >= steps.length || index === currentIndex) return;
+    if (isTurning || index < 0 || index >= slides.length || index === currentIndex) return;
     isTurning = true;
     typingRun += 1;
     card.classList.add(direction === 'next' ? 'turn-out-left' : 'turn-out-right');
@@ -195,7 +226,7 @@
 
   nextButton.addEventListener('click', () => {
     if (!completed[currentIndex]) return;
-    if (currentIndex === steps.length - 1) {
+    if (currentIndex === slides.length - 1) {
       window.location.href = 'index.html';
       return;
     }
@@ -203,7 +234,7 @@
   });
 
   copyButton.addEventListener('click', async () => {
-    const prompt = steps[currentIndex].prompt;
+    const prompt = slides[currentIndex].prompt;
     const original = copyButton.textContent;
     try {
       await navigator.clipboard.writeText(prompt);
