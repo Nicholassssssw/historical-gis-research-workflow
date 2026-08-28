@@ -57,6 +57,24 @@
 
     <div class="ornamental-divider" aria-hidden="true"><span>◆</span></div>
 
+    <section class="case-overview" aria-label="二十三日示範案例摘要">
+      <div class="case-overview-copy">
+        <span class="case-kicker">目前網站 example</span>
+        <h2>《江右游日記》二十三日</h2>
+        <p>本頁把同一份研究資料按八步教學次序重排；步驟一至七各自對應一張獨立 Excel worksheet，並列出專屬 Prompt；步驟八交付 ArcGIS layer 及地圖資料包。</p>
+        <div class="case-links">
+          <a class="case-index-link" href="results/jiangyou-23-step-sheets.xlsx" download>下載分步 worksheet Excel（含篩除及精簡 API 配對表）↓</a>
+          <a class="case-index-link" href="results/jiangyou-23-eight-step-prompts.md" download>下載八步 Prompt／結果索引 ↓</a>
+        </div>
+      </div>
+      <div class="case-stat-grid" aria-label="二十三日資料量摘要">
+        <div><strong>25</strong><span>經過地名</span></div>
+        <div><strong>40</strong><span>提及地名</span></div>
+        <div><strong>15</strong><span>待核補查點</span></div>
+        <div><strong>26</strong><span>有序線／走廊</span></div>
+      </div>
+    </section>
+
     <section class="workflow-step" id="step-1">
       <div class="step-watermark" aria-hidden="true">壹</div>
       <header class="step-heading">
@@ -65,7 +83,7 @@
       </header>
       <div class="step-content">
         <article class="prompt-panel">
-          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-1">複製</button></div>
+          <div class="panel-label"><span>Prompt</span></div>
           <textarea id="prompt-1" readonly aria-label="步驟一 Prompt">按出現次序抽取文章內的地名放入excel，欄位如下：序號、日期、地名、類別（行政區、部落、村莊）、細分類、行程（經過、提及）、原文；重複出現的地名保留每次紀錄；將行程為經過及行程為提及分開兩張sheet。
 
 以下的地名請放入另建的篩除sheet：
@@ -81,11 +99,8 @@
         </article>
         <article class="result-panel">
           <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
-          <div class="file-placeholder">
-            <span class="file-mark" aria-hidden="true">表</span>
-            <strong>步驟一成果檔案</strong>
-            <p>江右游日记_二十三日_步驟一_地名抽取.xlsx</p>
-            <a class="result-download-link" href="results/江右游日记_二十三日_步驟一_地名抽取.xlsx" download>下載 Excel ↓</a>
+          <div class="excel-viewer" data-xlsx-src="results/江右游日记_二十三日_步驟一_地名抽取.xlsx">
+            <p class="excel-viewer-status">載入 Excel 內容…</p>
           </div>
         </article>
       </div>
@@ -99,12 +114,14 @@
       </header>
       <div class="step-content">
         <article class="prompt-panel">
-          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-2">複製</button></div>
+          <div class="panel-label"><span>Prompt</span></div>
           <textarea id="prompt-2" readonly aria-label="步驟二 Prompt">將行程為經過的地點歸納出古代的地區：次序由大區域至小（承宣佈政使司&gt;府（直隸州）&gt;州&gt;縣）；再進行古今對比，配對古代同現代地名。</textarea>
         </article>
         <article class="result-panel">
           <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
-          <div class="file-placeholder"><span class="file-mark" aria-hidden="true">表</span><strong>古今地區配對成果</strong><p>江右游日记_二十三日_步驟二_古今地區.xlsx</p><a class="result-download-link" href="results/江右游日记_二十三日_步驟二_古今地區.xlsx" download>下載 Excel ↓</a></div>
+          <div class="excel-viewer" data-xlsx-src="results/江右游日记_二十三日_步驟二_古今地區.xlsx">
+            <p class="excel-viewer-status">載入 Excel 內容…</p>
+          </div>
         </article>
       </div>
     </section>
@@ -117,12 +134,14 @@
       </header>
       <div class="step-content">
         <article class="prompt-panel">
-          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-3">複製</button></div>
+          <div class="panel-label"><span>Prompt</span></div>
           <textarea id="prompt-3" readonly aria-label="步驟三 Prompt">請在識典古籍閱讀地方志原文，只保留同時提及地名及方向、里數、界址、水系或相鄰關係的句子。輸出地方志書名、版本、原句、參照地點與匹配狀態；配不到時留空並標示未匹配，不可猜測經緯度。https://www.shidianguji.com/</textarea>
         </article>
         <article class="result-panel">
           <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
-          <div class="file-placeholder"><span class="file-mark" aria-hidden="true">志</span><strong>地方志距離證據成果</strong><p>江右游日记_二十三日_步驟三_地方志.xlsx</p><a class="result-download-link" href="results/江右游日记_二十三日_步驟三_地方志.xlsx" download>下載 Excel ↓</a></div>
+          <div class="excel-viewer" data-xlsx-src="results/江右游日记_二十三日_步驟三_地方志.xlsx">
+            <p class="excel-viewer-status">載入 Excel 內容…</p>
+          </div>
         </article>
       </div>
     </section>
@@ -135,12 +154,14 @@
       </header>
       <div class="step-content">
         <article class="prompt-panel">
-          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-4">複製</button></div>
+          <div class="panel-label"><span>Prompt</span></div>
           <textarea id="prompt-4" readonly aria-label="步驟四 Prompt">請以古今行政區 polygon、前後已確認錨點、地方志方向與里數設定候選經緯度範圍。保存 bbox、走廊及 WKT；區域級證據只支持搜尋範圍，不得用縣治或 bbox 中心冒充微地名精確座標。</textarea>
         </article>
         <article class="result-panel">
           <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
-          <div class="file-placeholder"><span class="file-mark" aria-hidden="true">界</span><strong>座標範圍成果</strong><p>江右游日记_二十三日_步驟四_座標範圍.xlsx</p><a class="result-download-link" href="results/江右游日记_二十三日_步驟四_座標範圍.xlsx" download>下載 Excel ↓</a></div>
+          <div class="excel-viewer" data-xlsx-src="results/江右游日记_二十三日_步驟四_座標範圍.xlsx">
+            <p class="excel-viewer-status">載入 Excel 內容…</p>
+          </div>
         </article>
       </div>
     </section>
@@ -153,12 +174,14 @@
       </header>
       <div class="step-content">
         <article class="prompt-panel">
-          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-5">複製</button></div>
+          <div class="panel-label"><span>Prompt</span></div>
           <textarea id="prompt-5" readonly aria-label="步驟五 Prompt">Prompt 內容待提供。請把步驟五「用 database 及 API 配對地點經緯度」所使用的完整 Prompt 放在這裡。</textarea>
         </article>
         <article class="result-panel">
           <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
-          <div class="file-placeholder"><span class="file-mark" aria-hidden="true">庫</span><strong>資料庫與 API 配對成果</strong><p>Excel 檔案待提供</p><span class="pending-badge">待加入</span></div>
+          <div class="excel-viewer" data-xlsx-src="results/江右游日记_二十三日_步驟五_API配對.xlsx">
+            <p class="excel-viewer-status">載入 Excel 內容…</p>
+          </div>
         </article>
       </div>
     </section>
@@ -171,12 +194,14 @@
       </header>
       <div class="step-content">
         <article class="prompt-panel">
-          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-6">複製</button></div>
+          <div class="panel-label"><span>Prompt</span></div>
           <textarea id="prompt-6" readonly aria-label="步驟六 Prompt">Prompt 內容待提供。請把步驟六「透過地方志推算經緯度」所使用的完整 Prompt 放在這裡。</textarea>
         </article>
         <article class="result-panel">
           <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
-          <div class="file-placeholder"><span class="file-mark" aria-hidden="true">推</span><strong>地方志座標推算成果</strong><p>江右游日记_二十三日_步驟六_地方志推算.xlsx</p><a class="result-download-link" href="results/江右游日记_二十三日_步驟六_地方志推算.xlsx" download>下載 Excel ↓</a></div>
+          <div class="excel-viewer" data-xlsx-src="results/江右游日记_二十三日_步驟六_地方志推算.xlsx">
+            <p class="excel-viewer-status">載入 Excel 內容…</p>
+          </div>
         </article>
       </div>
     </section>
@@ -189,12 +214,14 @@
       </header>
       <div class="step-content">
         <article class="prompt-panel">
-          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-7">複製</button></div>
+          <div class="panel-label"><span>Prompt</span></div>
           <textarea id="prompt-7" readonly aria-label="步驟七 Prompt">Prompt 內容待提供。請把步驟七「透過原文推算經緯度」所使用的完整 Prompt 放在這裡。</textarea>
         </article>
         <article class="result-panel">
           <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
-          <div class="file-placeholder"><span class="file-mark" aria-hidden="true">文</span><strong>原文座標推算成果</strong><p>Excel 檔案待提供</p><span class="pending-badge">待加入</span></div>
+          <div class="excel-viewer" data-xlsx-src="results/江右游日记_二十三日_步驟七_原文推算.xlsx">
+            <p class="excel-viewer-status">載入 Excel 內容…</p>
+          </div>
         </article>
       </div>
     </section>
@@ -207,25 +234,24 @@
       </header>
       <div class="step-content">
         <article class="prompt-panel">
-          <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-8">複製</button></div>
+          <div class="panel-label"><span>Prompt</span></div>
           <textarea id="prompt-8" readonly aria-label="步驟八 Prompt">Prompt 內容待提供。請把步驟八「將經緯度以地圖呈現」所使用的完整 Prompt 或製圖設定放在這裡。</textarea>
         </article>
         <article class="result-panel map-result-panel">
           <div class="panel-label"><span>Result</span><small>ArcGIS map</small></div>
-          <div class="arcgis-placeholder">
-            <div class="map-grid" aria-hidden="true"></div>
-            <span class="map-pin pin-one" aria-hidden="true"></span>
-            <span class="map-pin pin-two" aria-hidden="true"></span>
-            <span class="map-pin pin-three" aria-hidden="true"></span>
-            <span class="map-line" aria-hidden="true"></span>
-            <div class="map-message"><span class="file-mark" aria-hidden="true">圖</span><strong>ArcGIS 地圖待嵌入</strong><p>提供 Web Map 連結後可直接放在此處</p><span class="pending-badge">待加入</span></div>
-          </div>
+          <div class="arcgis-map" data-arcgis-map="jiangyou-23" role="application" aria-label="二十三日 ArcGIS 地圖"></div>
+          <p class="arcgis-map-note">WGS84 / EPSG:4326。圖層由下而上：再算走廊 → 再算線 → route_auxiliary 輔助點 → 正式再算點；點擊任何圖徵可查看座標、判定分類、誤差半徑及證據來源。右上角可開關圖層，左下角為圖例。</p>
         </article>
       </div>
     </section>
   </main>
 
   <footer><p><span aria-hidden="true">輿</span><strong>研究提示</strong>　每一步的 Prompt、資料來源與結果應一併保存，確保研究過程可以追溯。</p></footer>
+  <script src="example23.js"></script>
+  <script src="results-preview.js"></script>
+  <script src="excel-viewer.js"></script>
+  <script src="arcgis-config.js"></script>
+  <script src="arcgis-map.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

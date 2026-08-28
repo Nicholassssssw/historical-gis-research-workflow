@@ -116,7 +116,7 @@
   }
 
   function showCompleted(step) {
-    output.textContent = step.success;
+    output.textContent = `${step.success}\n\n【結果】\n${step.result || '請返回工作流程頁查看本步驟結果。'}`;
     cursor.hidden = true;
     promptText.value = step.prompt;
     promptPanel.hidden = false;
@@ -198,7 +198,7 @@
     feedback.textContent = '答案正確，正在整理本步驟 Prompt。';
     promptPanel.hidden = true;
 
-    const finalText = step.success;
+    const finalText = `${step.success}\n\n【結果】\n${step.result || '請返回工作流程頁查看本步驟結果。'}`;
     await typeText(finalText, () => {
       completed[currentIndex] = true;
       answerButton.textContent = '已完成';

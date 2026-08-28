@@ -1,19 +1,3 @@
-document.querySelectorAll('.copy-button').forEach((button) => {
-  button.addEventListener('click', async () => {
-    const target = document.getElementById(button.dataset.copyTarget);
-    if (!target) return;
-    const original = button.textContent;
-    try {
-      await navigator.clipboard.writeText(target.value);
-      button.textContent = '已複製';
-    } catch {
-      target.select();
-      button.textContent = '請手動複製';
-    }
-    window.setTimeout(() => { button.textContent = original; }, 1400);
-  });
-});
-
 const stepLinks = [...document.querySelectorAll('.step-nav a')];
 const stepSections = stepLinks
   .map((link) => document.querySelector(link.getAttribute('href')))
