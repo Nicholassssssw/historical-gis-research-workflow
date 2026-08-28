@@ -66,7 +66,18 @@
       <div class="step-content">
         <article class="prompt-panel">
           <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-1">複製</button></div>
-          <textarea id="prompt-1" readonly aria-label="步驟一 Prompt">Prompt 內容待提供。請把步驟一「抽地名」所使用的完整 Prompt 放在這裡。</textarea>
+          <textarea id="prompt-1" readonly aria-label="步驟一 Prompt">按出現次序抽取文章內的地名放入excel，欄位如下：序號、日期、地名、類別（行政區、部落、村莊）、細分類、行程（經過、提及）、原文；重複出現的地名保留每次紀錄；將行程為經過及行程為提及分開兩張sheet。
+
+以下的地名請放入另建的篩除sheet：
+1. 橋梁；
+2. 城門和普通城關，例如東門、西門、南門；
+3. 驛站、鋪舍及一般道路節點；
+4. 小型碼頭、馬頭、渡口、埠、市場及臨時泊船點；
+5. 私人住宅、人物住所、別墅、山莊、私人園圃；
+6. 建築群內部的單一殿堂、亭、龕、房舍；
+7. 只表示方向、比較、修辭或典故而不能指向實際位置的詞。
+
+上述項目若有助復原行程，標為 route_auxiliary，但 gis_decision 必須為 exclude；不得猜測其經緯度。不是具名地理實體者標為 excluded。小村莊、寺祠和洞穴不能只按名稱後綴保留，必須檢查其專名穩定性、外部對應、唯一定位可能、地理文化意義，以及是否只是姓氏住宅、小祠、小坳或臨時停泊處。重要但證據不足者標為 pending/review；尺度過小且無法定位者標為 exclude。</textarea>
         </article>
         <article class="result-panel">
           <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
@@ -89,7 +100,7 @@
       <div class="step-content">
         <article class="prompt-panel">
           <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-2">複製</button></div>
-          <textarea id="prompt-2" readonly aria-label="步驟二 Prompt">Prompt 內容待提供。請把步驟二「配對古代地區與現代地區」所使用的完整 Prompt 放在這裡。</textarea>
+          <textarea id="prompt-2" readonly aria-label="步驟二 Prompt">將行程為經過的地點歸納出古代的地區：次序由大區域至小（承宣佈政使司&gt;府（直隸州）&gt;州&gt;縣）；再進行古今對比，配對古代同現代地名。</textarea>
         </article>
         <article class="result-panel">
           <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
@@ -107,7 +118,7 @@
       <div class="step-content">
         <article class="prompt-panel">
           <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-3">複製</button></div>
-          <textarea id="prompt-3" readonly aria-label="步驟三 Prompt">Prompt 內容待提供。請把步驟三「配對地方志（有距離資料）」所使用的完整 Prompt 放在這裡。</textarea>
+          <textarea id="prompt-3" readonly aria-label="步驟三 Prompt">請在識典古籍閱讀地方志原文，只保留同時提及地名及方向、里數、界址、水系或相鄰關係的句子。輸出地方志書名、版本、原句、參照地點與匹配狀態；配不到時留空並標示未匹配，不可猜測經緯度。https://www.shidianguji.com/</textarea>
         </article>
         <article class="result-panel">
           <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
@@ -125,7 +136,7 @@
       <div class="step-content">
         <article class="prompt-panel">
           <div class="panel-label"><span>Prompt</span><button class="copy-button" type="button" data-copy-target="prompt-4">複製</button></div>
-          <textarea id="prompt-4" readonly aria-label="步驟四 Prompt">Prompt 內容待提供。請把步驟四「設定經緯度範圍」所使用的完整 Prompt 放在這裡。</textarea>
+          <textarea id="prompt-4" readonly aria-label="步驟四 Prompt">請以古今行政區 polygon、前後已確認錨點、地方志方向與里數設定候選經緯度範圍。保存 bbox、走廊及 WKT；區域級證據只支持搜尋範圍，不得用縣治或 bbox 中心冒充微地名精確座標。</textarea>
         </article>
         <article class="result-panel">
           <div class="panel-label"><span>Result</span><small>Excel sheet</small></div>
