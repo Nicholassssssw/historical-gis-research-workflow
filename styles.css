@@ -174,7 +174,7 @@ textarea:focus { border-color: var(--wood); box-shadow: 0 0 0 3px rgba(107,66,38
 .teaching-page .lesson-progress { margin-bottom: 10px; }
 .teaching-page .lesson-progress-copy { margin-bottom: 6px; }
 .teaching-page .lesson-deck { min-height: 0; }
-.teaching-page .lesson-card { min-height: 430px; padding: 18px 22px; }
+.teaching-page .lesson-card { min-height: 410px; padding: 18px 22px; }
 .teaching-page .lesson-card-header { padding-bottom: 10px; }
 .teaching-page .lesson-card-header h2 { margin-top: 3px; font-size: 21px; }
 .teaching-page .lesson-kicker { font-size: 9px; }
@@ -182,12 +182,15 @@ textarea:focus { border-color: var(--wood); box-shadow: 0 0 0 3px rgba(107,66,38
 .teaching-page .lesson-intro-panel { min-height: 330px; padding: 30px 55px 14px; }
 .teaching-page .lesson-intro-text { font-size: 15px; line-height: 1.75; }
 .teaching-page .lesson-start-button { padding: 9px 22px; }
-.teaching-page .lesson-screen { height: 170px; margin: 12px 4px 10px; padding: 0 22px 18px; }
+.teaching-page .lesson-workspace { margin: 12px 4px 10px; display: grid; grid-template-columns: minmax(0,1.7fr) minmax(250px,.7fr); gap: 12px; align-items: stretch; }
+.teaching-page .lesson-workspace:has(.lesson-question[hidden]) .lesson-screen { grid-column: 1 / -1; }
+.teaching-page .lesson-workspace:has(.lesson-screen[hidden]) { display: none; }
+.teaching-page .lesson-screen { height: 270px; margin: 0; padding: 0 22px 18px; }
 .teaching-page .screen-toolbar { min-height: 32px; margin: 0 -22px; padding: 8px 14px 6px; }
 .teaching-page .typewriter-text { font-size: 13px; line-height: 1.65; }
-.teaching-page .lesson-question { margin-bottom: 10px; padding: 11px 13px; }
+.teaching-page .lesson-question { max-height: 270px; margin: 0; padding: 11px 13px; overflow-y: auto; }
 .teaching-page .lesson-question legend { font-size: 12px; line-height: 1.45; }
-.teaching-page #question-options { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 5px 10px; }
+.teaching-page #question-options { display: grid; grid-template-columns: 1fr; gap: 4px; }
 .teaching-page .lesson-question label { margin-top: 4px; padding: 6px 8px; font-size: 11px; line-height: 1.45; }
 .teaching-page .answer-button { margin: 8px 0 0; padding: 7px 14px; }
 .teaching-page .answer-feedback { margin-top: 8px; }
@@ -248,6 +251,12 @@ footer p > span { position: absolute; top: 13px; left: 1px; width: 18px; height:
   .teaching-page .teaching-hero .hero-copy { grid-template-columns: auto 1fr; }
   .teaching-page .teaching-hero .hero-copy > p:last-child { grid-column: 1 / -1; }
   .teaching-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .teaching-page .lesson-workspace { grid-template-columns: 1fr; }
+  .teaching-page .lesson-screen { height: 210px; }
+  .teaching-page .lesson-question { max-height: none; }
 }
 
 @media (max-width: 640px) {

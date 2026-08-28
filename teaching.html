@@ -38,21 +38,23 @@
           <button class="lesson-start-button" id="lesson-start-button" type="button">開始</button>
         </section>
 
-        <div class="lesson-screen" aria-live="polite">
-          <div class="screen-toolbar"><span class="screen-label">動態教學</span></div>
-          <div class="typewriter-output"><p class="typewriter-text" id="typewriter-text"></p><span class="typing-cursor" id="typing-cursor" aria-hidden="true"></span></div>
+        <div class="lesson-workspace">
+          <div class="lesson-screen" aria-live="polite">
+            <div class="screen-toolbar"><span class="screen-label">動態教學</span></div>
+            <div class="typewriter-output"><p class="typewriter-text" id="typewriter-text"></p><span class="typing-cursor" id="typing-cursor" aria-hidden="true"></span></div>
 
-          <section class="generated-prompt-panel" id="generated-prompt-panel" hidden>
-            <header><div><span>已完成</span><strong>本步驟 Prompt 可直接複製</strong></div><button class="lesson-copy-button" id="lesson-copy-button" type="button">複製 Prompt</button></header>
-            <textarea class="generated-prompt-text" id="generated-prompt-text" readonly aria-label="已生成的可複製 Prompt"></textarea>
-          </section>
+            <section class="generated-prompt-panel" id="generated-prompt-panel" hidden>
+              <header><div><span>已完成</span><strong>本步驟 Prompt 可直接複製</strong></div><button class="lesson-copy-button" id="lesson-copy-button" type="button">複製 Prompt</button></header>
+              <textarea class="generated-prompt-text" id="generated-prompt-text" readonly aria-label="已生成的可複製 Prompt"></textarea>
+            </section>
+          </div>
+
+          <fieldset class="lesson-question" id="lesson-question" hidden>
+            <legend id="question-legend"></legend>
+            <div id="question-options"></div>
+            <div class="answer-row"><button class="answer-button" id="answer-button" type="button">提交答案</button><p class="answer-feedback" id="answer-feedback" aria-live="polite"></p></div>
+          </fieldset>
         </div>
-
-        <fieldset class="lesson-question" id="lesson-question" hidden>
-          <legend id="question-legend"></legend>
-          <div id="question-options"></div>
-          <div class="answer-row"><button class="answer-button" id="answer-button" type="button">提交答案</button><p class="answer-feedback" id="answer-feedback" aria-live="polite"></p></div>
-        </fieldset>
 
         <footer class="lesson-card-footer" id="lesson-card-footer">
           <button class="lesson-nav-button" id="previous-step" type="button" disabled>← 上一步</button>
