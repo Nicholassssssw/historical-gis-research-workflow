@@ -91,8 +91,10 @@ textarea:focus { border-color: var(--wood); box-shadow: 0 0 0 3px rgba(107,66,38
 .file-placeholder { min-height: 260px; padding: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px dashed var(--line-strong); text-align: center; }
 .file-mark { width: 52px; height: 52px; display: grid; place-items: center; margin-bottom: 15px; border: 1px solid var(--bronze); color: var(--bronze); font-size: 22px; font-weight: 900; transform: rotate(-1deg); }
 .file-placeholder strong { color: var(--wood-dark); font-size: 16px; }
-.file-placeholder p { margin: 7px 0 14px; color: var(--ink-soft); font-size: 12px; }
+.file-placeholder p { margin: 7px 0 14px; overflow-wrap: anywhere; color: var(--ink-soft); font-size: 12px; }
 .pending-badge { padding: 5px 9px; border-radius: 999px; background: #766b5c; color: var(--cream); font-size: 10px; font-weight: 800; }
+.result-download-link { display: inline-flex; padding: 8px 12px; border: 1px solid var(--vermillion); background: var(--vermillion); color: var(--cream); text-decoration: none; font-size: 11px; font-weight: 800; }
+.result-download-link:hover { background: var(--wood-dark); }
 .arcgis-placeholder { position: relative; min-height: 260px; overflow: hidden; border: 1px solid var(--line-strong); background: #e0d5b7; }
 .map-grid { position: absolute; inset: 0; opacity: .38; background-image: linear-gradient(rgba(147,112,47,.24) 1px, transparent 1px), linear-gradient(90deg, rgba(147,112,47,.24) 1px, transparent 1px); background-size: 34px 34px; }
 .map-grid::before, .map-grid::after { content: ""; position: absolute; border: 1px solid rgba(107,66,38,.25); border-radius: 50%; }
