@@ -120,6 +120,7 @@
     cursor.hidden = true;
     promptText.value = step.prompt;
     promptPanel.hidden = false;
+    screen.scrollTop = screen.scrollHeight;
     question.hidden = false;
     feedback.className = 'answer-feedback is-correct';
     feedback.textContent = '答案正確，Prompt 已完成。';
@@ -204,6 +205,7 @@
       feedback.textContent = 'Prompt 已完成，可以複製或前往下一步。';
       promptText.value = step.prompt;
       promptPanel.hidden = false;
+      screen.scrollTop = screen.scrollHeight;
       promptPanel.classList.add('copy-reveal');
       window.setTimeout(() => promptPanel.classList.remove('copy-reveal'), 500);
       updateNavigation();
