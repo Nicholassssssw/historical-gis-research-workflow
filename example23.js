@@ -26,7 +26,6 @@
       prompt: '請只處理《江右游日記》二十三日段落，按出現次序抽取具名地理實體；輸出只保留行程欄等於「經過」的紀錄。輸出序號、日期、地名、類別、細分類、行程及原文；重複出現的地名保留每次紀錄。橋、城門、驛站、碼頭、私人住所、建築內部小物及修辭方向詞，另列入篩除表，不得當作正式地標。',
       sheet: '步驟一_抽地名',
       kind: 'Excel sheet',
-      promptSource: 'project：prompts/extract_places.txt；二十三日 example 版',
       stats: ['經過 25 筆', '另有篩除 15 筆', '只含二十三日'],
       detail: '本分步檔只取「江右游日记_經過」二十三日 25 筆；另設「江右游日记_篩除」worksheet，保留二十三日經過的 15 筆 route_auxiliary／excluded，不混入提及。',
       sequence: passSequence,
@@ -180,7 +179,7 @@
     const isExcel = Boolean(step.download && /\.xlsx?$/i.test(step.download.href));
     const download = step.download && !isExcel ? `<a class="download-link" href="${step.download.href}" download>${escapeHtml(step.download.label)} ↗</a>` : '';
     const excelViewer = isExcel ? `<div class="excel-viewer" data-xlsx-src="${escapeHtml(step.download.href)}"><p class="excel-viewer-status">載入 Excel 內容…</p></div>` : '';
-    panel.innerHTML = `<div class="panel-label"><span>Result</span><small>${escapeHtml(step.kind)}</small></div><div class="result-summary"><strong>${escapeHtml(step.sheet)}</strong><div class="data-pills">${chips}</div><p>${escapeHtml(step.detail)}</p>${detailsMarkup(step.details)}${sequence}${map}${excelViewer}${download}</div>`;
+    panel.innerHTML = `<div class="panel-label"><span>Result</span><small>${escapeHtml(step.kind)}</small></div><div class="result-summary"><div class="data-pills">${chips}</div><p>${escapeHtml(step.detail)}</p>${detailsMarkup(step.details)}${sequence}${map}${excelViewer}${download}</div>`;
   }
 
   const heroDescription = document.querySelector('.hero-copy > p:last-child');

@@ -11,7 +11,6 @@
   };
   const slides = [introSlide, ...steps];
 
-  const deck = document.getElementById('lesson-deck');
   const card = document.getElementById('lesson-card');
   const kicker = document.getElementById('lesson-kicker');
   const title = document.getElementById('lesson-title');
@@ -47,17 +46,17 @@
 
   const pause = (milliseconds) => new Promise((resolve) => window.setTimeout(resolve, milliseconds));
 
-  async function typeText(text, onComplete) {
+  async function typeText(text, onComplete, speed = 13) {
     const run = ++typingRun;
     output.textContent = '';
     screen.scrollTop = 0;
     cursor.hidden = false;
-    const speed = reducedMotion ? 0 : 13;
+    const typingDelay = reducedMotion ? 0 : speed;
     for (const character of text) {
       if (run !== typingRun) return;
       output.textContent += character;
       if (output.textContent.length % 8 === 0) screen.scrollTop = screen.scrollHeight;
-      if (speed) await pause(character === '\n' ? 80 : speed);
+      if (typingDelay) await pause(character === '\n' ? typingDelay * 4 : typingDelay);
     }
     if (run !== typingRun) return;
     cursor.hidden = true;
@@ -209,34 +208,27 @@
       promptPanel.classList.add('copy-reveal');
       window.setTimeout(() => promptPanel.classList.remove('copy-reveal'), 500);
       updateNavigation();
-    });
+    }, 34);
   }
 
-  async function turnTo(index, direction) {
+  function turnTo(index) {
     if (isTurning || index < 0 || index >= slides.length || index === currentIndex) return;
     isTurning = true;
     typingRun += 1;
-    card.classList.add(direction === 'next' ? 'turn-out-left' : 'turn-out-right');
-    await pause(reducedMotion ? 0 : 230);
     currentIndex = index;
     renderStep();
-    card.classList.remove('turn-out-left', 'turn-out-right');
-    card.classList.add(direction === 'next' ? 'turn-in-right' : 'turn-in-left');
-    await pause(reducedMotion ? 0 : 380);
-    card.classList.remove('turn-in-right', 'turn-in-left');
     isTurning = false;
     updateNavigation();
-    deck.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
   }
 
   answerButton.addEventListener('click', completeStep);
 
   introStartButton.addEventListener('click', () => {
     completed[0] = true;
-    turnTo(1, 'next');
+    turnTo(1);
   });
 
-  previousButton.addEventListener('click', () => turnTo(currentIndex - 1, 'previous'));
+  previousButton.addEventListener('click', () => turnTo(currentIndex - 1));
 
   nextButton.addEventListener('click', () => {
     if (!completed[currentIndex]) return;
@@ -244,7 +236,7 @@
       window.location.href = 'index.html';
       return;
     }
-    turnTo(currentIndex + 1, 'next');
+    turnTo(currentIndex + 1);
   });
 
   copyButton.addEventListener('click', async () => {

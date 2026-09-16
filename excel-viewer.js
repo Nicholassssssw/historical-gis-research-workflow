@@ -30,21 +30,8 @@
     container.append(p);
   }
 
-  function renderViewer(container, book, fileName) {
+  function renderViewer(container, book) {
     container.innerHTML = '';
-
-    // 檔名列，取代原本的下載連結
-    const caption = document.createElement('p');
-    caption.className = 'excel-viewer-file';
-    const icon = document.createElement('span');
-    icon.className = 'excel-viewer-file-icon';
-    icon.setAttribute('aria-hidden', 'true');
-    icon.textContent = 'XLS';
-    const nameEl = document.createElement('span');
-    nameEl.className = 'excel-viewer-file-name';
-    nameEl.textContent = fileName;
-    caption.append(icon, nameEl);
-    container.append(caption);
 
     const frame = document.createElement('div');
     frame.className = 'excel-viewer-frame';
@@ -78,13 +65,13 @@
       button.type = 'button';
       button.className = 'excel-viewer-tab';
       button.setAttribute('role', 'tab');
-      button.textContent = sheet.name;
+      button.textContent = `結果 ${index + 1}`;
+      button.setAttribute('aria-label', `查看結果 ${index + 1}`);
       button.addEventListener('click', () => showSheet(index));
       tabs.append(button);
     });
 
-    // 工作表分頁列放在底部，與 Excel 一致
-    container.append(tabs);
+    if (sheets.length > 1) container.append(tabs);
     showSheet(0);
   }
 
@@ -106,7 +93,7 @@
       return;
     }
 
-    renderViewer(container, book, fileName);
+    renderViewer(container, book);
   }
 
   function init() {
