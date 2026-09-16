@@ -37,7 +37,6 @@
       prompt: '請把二十三日的每筆經過地點配對到 1636 年古代行政層級：承宣布政使司→府（直隸州）→州→縣，再配對現代省級、地級、縣級。保留古今關係、配對狀態、來源及衝突；現代同名不得單獨視為同一地點。',
       sheet: '步驟二_古今地區',
       kind: 'Excel sheet',
-      promptSource: 'project：artifact_work/map_jiangyou_historical_modern.py；add_chgis_steps_sheet.mjs',
       stats: ['二十三日 25 筆', '古代隸屬 confirmed 24', '古今關係 probable 15／review 9'],
       detail: '地區層級先作搜尋限制，未把府縣治所中心冒充山峰、洞穴或寺觀座標。',
       download: { href: 'results/江右游日记_二十三日_步驟二_古今地區.xlsx', label: '下載步驟二獨立 Excel' },
@@ -53,7 +52,6 @@
       prompt: '請在識典古籍閱讀地方志原文，只保留同時提及地名及方向、里數、界址、水系或相鄰關係的句子。輸出地方志書名、版本、原句、參照地點與匹配狀態；配不到時留空並標示未匹配，不可猜測經緯度。',
       sheet: '步驟三_地方志',
       kind: 'Excel sheet',
-      promptSource: 'project：shidian_gazetteer_matches.mjs；add_steps3_5_sheets.mjs',
       stats: ['二十三日補查 16 筆', '匹配 4 筆（五面峰兩次＋小隱岩＋巴溪）', '未匹配 12 筆'],
       detail: '「小隱岩」、「巴溪」及兩次出現的「五面峰」已有帶地理資訊的地方志原句；其餘配不到的格位保留空白及待核狀態。',
       download: { href: 'results/江右游日记_二十三日_步驟三_地方志.xlsx', label: '下載步驟三獨立 Excel' },
@@ -69,7 +67,6 @@
       prompt: '請以古今行政區 polygon、前後已確認錨點、地方志方向與里數設定候選經緯度範圍。保存 bbox、走廊及 WKT；區域級證據只支持搜尋範圍，不得用縣治或 bbox 中心冒充微地名精確座標。',
       sheet: '步驟四_座標範圍',
       kind: 'Excel sheet',
-      promptSource: 'project：fetch_modern_admin_boundaries.py；add_steps3_5_sheets.mjs',
       stats: ['二十三日相關行政區 6 個', '原始 WGS84 邊界頂點 35,546', '用作 limitation'],
       detail: '獨立分步檔只保留二十三日古今對照涉及的江西省、鷹潭／貴溪及撫州／宜黃／崇仁行政邊界摘要；完整頂點仍在原始工作簿。',
       download: { href: 'results/江右游日记_二十三日_步驟四_座標範圍.xlsx', label: '下載步驟四獨立 Excel' },
@@ -84,7 +81,6 @@
       prompt: '請在上述範圍內查詢 CHGIS/TGAZ、Wikidata、OpenStreetMap/Nominatim、Amap 及 Google Maps。比較名稱／異名、1636 年代、古今行政區、地物類型及候選點是否落在限制範圍；保留查詢結果、來源及拒收原因，不採用搜尋第一項作為自動答案。',
       sheet: '步驟五_API配對',
       kind: 'Excel sheet',
-      promptSource: 'project：add_chgis_steps_sheet.mjs；run_six_step_api_search.mjs',
       stats: ['精簡表 16 筆', '統一資料來源欄', '直接接受 0 筆'],
       detail: '步驟五仍交叉查詢 CHGIS/TGAZ、OSM/Nominatim、Wikidata、Amap 及 Google Maps，但主表只保留序號、日期、地名、經緯度及一個統一「資料來源」欄；Amap／Google Maps只保留公開搜尋連結。',
       download: { href: 'results/江右游日记_二十三日_步驟五_API配對.xlsx', label: '下載步驟五獨立 Excel' },
@@ -100,7 +96,6 @@
       prompt: '請用地方志的參照地點、方向、里程及母地物描述推算二十三日尚未定位地點的中心點。將結果限制在行政 polygon／走廊交集，輸出中心經緯度、誤差半徑、參照點、推算方法及證據狀態，並明確標示為 pending/review。',
       sheet: '步驟六_地方志推算',
       kind: 'Excel sheet',
-      promptSource: 'project：add_day19_day23_six_step_research.mjs；add_day19_day23_supplement.mjs',
       stats: ['推算 15 筆', '直接地方志配對 4 筆', '其餘 11 筆綜合推算'],
       detail: '步驟三只有 4 筆地方志直接配對；本步驟 15 筆是地方志片段、原文方向／里數、母地物及走廊交集的推算中心點，全部仍是 pending/review，並非 15 筆地方志命中。',
       download: { href: 'results/江右游日记_二十三日_步驟六_地方志推算.xlsx', label: '下載步驟六獨立 Excel' },
@@ -116,7 +111,6 @@
       prompt: '請用二十三日原文明示方向、里數、前後站次序及橋／村／溪流／山路輔助節點，建立有序路徑鏈。將仍未有獨立座標的地名投影到錨點之間的路徑走廊，重新計算中心點及誤差半徑；只表述為約略位置。',
       sheet: '步驟七_原文推算',
       kind: 'Excel sheet',
-      promptSource: 'project：add_auxiliary_nodes_corridor_recalc.mjs',
       stats: ['路徑鏈投影 8 筆', '輔助節點 13 筆', '正式點全部 pending/review'],
       detail: '大霍嶺至巴溪一段主要靠原文次序、里數及輔助節點連成路徑；其相對方向比單點絕對位置更可靠。',
       download: { href: 'results/江右游日记_二十三日_步驟七_原文推算.xlsx', label: '下載步驟七獨立 Excel' },
@@ -131,7 +125,6 @@
       prompt: '請把二十三日 WGS84 資料輸出為 ArcGIS 可讀的正式點、輔助點、有序線及走廊 polygon。以 point_order／line_order 保留文章次序，按 confidence、coordinate_status 及 gis_decision 分色；彈出資訊顯示原文、來源、方法及誤差半徑。',
       sheet: 'ArcGIS map（無 Excel worksheet）',
       kind: 'ArcGIS map',
-      promptSource: 'project：build_arcgis_map_package.mjs；build_arcgis_seven_paragraphs.mjs',
       stats: ['正式點 15', '輔助點 13', '有序線 26／走廊 26'],
       detail: '二十三日專用資料包可直接加入 ArcGIS；建議先加走廊，再加線、輔助點，最後加正式點。',
       details: [
@@ -158,16 +151,6 @@
     const textarea = document.getElementById(`prompt-${step.id}`);
     if (!panel) return;
     if (textarea) textarea.value = step.prompt;
-    const promptPanel = document.querySelector(`#step-${step.id} .prompt-panel`);
-    if (promptPanel && step.promptSource) {
-      let source = promptPanel.querySelector('.prompt-source');
-      if (!source) {
-        source = document.createElement('small');
-        source.className = 'prompt-source';
-        promptPanel.querySelector('.panel-label')?.after(source);
-      }
-      source.textContent = step.promptSource;
-    }
     panel.className = `result-panel example-result-panel${step.map ? ' map-result-panel' : ''}`;
     const chips = step.stats.map((stat) => `<span class="data-pill">${escapeHtml(stat)}</span>`).join('');
     const sequence = step.sequence ? sequenceMarkup(step.sequence) : '';
